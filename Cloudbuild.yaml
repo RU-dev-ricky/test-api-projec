@@ -1,0 +1,26 @@
+steps:
+# Build the container image
+- id: docker-build
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/shopify-con:$SHORT_SHA', '.']
+# Push the container image to Container Registry
+- id: docker-push
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia.gcr.io/$PROJECT_ID/shopify-con:$SHORT_SHA']
+# Deploy container image to Cloud Run
+- id: deploy-cloud-run
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+  - 'run'
+  - 'deploy'
+  - 'shopify-con'
+  - '--image'
+  - 'asia.gcr.io/$PROJECT_ID/shopify-con:$SHORT_SHA'
+  - '--region'
+  - 'asia-southeast1'
+  - '--platform'
+  - 'managed'
+images:
+- 'asia.gcr.io/$PROJECT_ID/shopify-con:$SHORT_SHA'
+timeout: 1000s

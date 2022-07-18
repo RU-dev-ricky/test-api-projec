@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/sample-api', 'ShopifyController@sampleAPI'); # sample outside network get api
+
+
