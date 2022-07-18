@@ -9,7 +9,7 @@ RUN docker-php-ext-install pdo pdo_pgsql
 RUN apk add --no-cache nginx wget
 
 RUN mkdir -p /run/nginx
-ENV PORT 8080
+ENV PORT 9000
 
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
@@ -22,7 +22,3 @@ RUN cd /app && \
 RUN chown -R www-data: /app
 # CMD bash -c "chmod -R 777 /var/www && php artisan migrate --seed && php artisan storage:link"
 CMD sh /app/docker/startup.sh
-
-# Expose port 9000 and start php-fpm server
-EXPOSE 8080
-CMD ["php-fpm"]
