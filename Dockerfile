@@ -22,3 +22,7 @@ RUN cd /app && \
 RUN chown -R www-data: /app
 # CMD bash -c "chmod -R 777 /var/www && php artisan migrate --seed && php artisan storage:link"
 CMD sh /app/docker/startup.sh
+
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]
