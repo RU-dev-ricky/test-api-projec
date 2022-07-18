@@ -1,5 +1,5 @@
 steps:
-# Build the container image
+# Build the container images
 - id: docker-build
   name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/shopify-con:$SHORT_SHA', '.']
