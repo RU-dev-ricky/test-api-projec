@@ -18,7 +18,7 @@ class ShopifyController extends Controller
             ]
         ]);
         try {
-            $response = $http->get('https://api.publicapis.org/entries');
+            $response = $http->get('https://api.publicapis.org/categories');
             $result = json_decode((string) $response->getBody(), true);
             return $result;
         } catch (RequestException $e) {
