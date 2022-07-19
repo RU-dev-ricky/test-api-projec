@@ -22,3 +22,7 @@ RUN cd /app && \
 RUN chown -R www-data: /app
 # CMD bash -c "chmod -R 777 /var/www && php artisan migrate --seed && php artisan storage:link"
 CMD sh /app/docker/startup.sh
+
+WORKDIR /app
+EXPOSE 8080
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
